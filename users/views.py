@@ -16,21 +16,17 @@ class UserViewSet(ViewSet):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-    def get_user(self, request, *args, **kwargs):
-        serializer = serializers.GetUserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        token = Token.objects.get(key=serializer.validated_data['token'])
-
-        return Response({"email": token.user.email,})
-
+    # def get_user(self, request, *args, **kwargs):
+    #     serializer = serializers.GetUserSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     access_token = Token.objects.get(key=serializer.validated_data['token'])
+    #     refresh_token = Token.objects.get(key=serializer.validated_data['token'])
+    #     return Response({"email": access_token.user.email, })
 
     def create_token(self, request, *args, **kwargs):
         serializer = serializers.CreateTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = models.CustomUser.objects.get(email=serializer.validated_data['email'])
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'email': user.email
-        })
+
+        tokens = self.user_services.create_token(data=serializer.validated_data)
+
+        return Response(tokens)
