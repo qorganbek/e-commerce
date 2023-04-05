@@ -19,10 +19,5 @@ class UserReposV1:
         return self.model.objects.create_user(**data)
 
     def get_user(self, data: OrderedDict):
-        user = get_object_or_404(self.model, email=data['email'])
-        # raise self.model.DoesNotExist
+        return get_object_or_404(self.model, **data)
 
-        if user.check_password(data['password']):
-            raise self.model.DoesNotExist
-
-        return user

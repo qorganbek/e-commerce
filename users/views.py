@@ -12,8 +12,14 @@ class UserViewSet(ViewSet):
         serializer = serializers.CreateUserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        self.user_services.create_user(data=serializer.validated_data)
+        data = self.user_services.create_user(data=serializer.validated_data)
 
+        return Response(data, status=status.HTTP_201_CREATED)
+
+    def verify_user(self, request, *args, **kwargs):
+        serializer = serializers.VerifyUserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.user_services.verify_user(data=serializer.validated_data)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     # def get_user(self, request, *args, **kwargs):
@@ -27,6 +33,14 @@ class UserViewSet(ViewSet):
         serializer = serializers.CreateTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        tokens = self.user_services.create_token(data=serializer.validated_data)
+        session_id = self.user_services.create_token(data=serializer.validated_data)
+
+        return Response(session_id)
+
+    def verify_token(self, request, *args, **kwargs):
+        serializer = serializers.VerifyUserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        tokens = self.user_services.verify_token(data=serializer.validated_data)
 
         return Response(tokens)
