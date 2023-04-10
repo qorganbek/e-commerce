@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
-
+from . import choices
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, phone_number, email):
@@ -22,6 +22,7 @@ class CustomUserManager(BaseUserManager):
             email=email,
             password=password
         )
+        user.set_password(password)
         user.is_admin = True
         user.is_superuser = True
         user.is_staff = True
@@ -36,6 +37,7 @@ class CustomUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     username = models.CharField(blank=True, null=True, max_length=1)
     email = models.EmailField(verbose_name=_("Email"), unique=True)
+    user_type = models.CharField(max_length=10, choices=choices.UserType.choices, blank=True, null=True)
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = ['email']
     phone_number = PhoneNumberField(blank=True, null=True, unique=True)
@@ -43,6 +45,3 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return str(self.phone_number)
-
-
-# tokens access and refresh

@@ -1,0 +1,10 @@
+{% block subject %} Welcome E-commerce {% endblock %}
+{% block plain %}
+  Hi,
+
+  You just signed up for my website, using:
+      email: {{email}}
+      phone_number: {{phone_number}}
+
+  Thanks, you rock!
+{% endblock %}

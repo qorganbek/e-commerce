@@ -1,10 +1,11 @@
 import random
 import uuid
 from typing import Protocol, OrderedDict
-
 from django.core.cache import cache
+from templated_email import send_templated_mail
 from rest_framework_simplejwt import tokens
 
+from src import settings
 from . import repos, models
 
 
@@ -34,7 +35,7 @@ class UserServicesV1:
         print("this is verify")
         user = self.user_repos.create_user(
             data={'email': user_data['email'], 'phone_number': user_data['phone_number']})
-        self._send_letter_to_email(email=user.email)
+        self._send_letter_to_email(user=user)
 
     def create_user(self, data: OrderedDict) -> dict:
         session_id = self._verify_phone_number(data=data)
@@ -62,23 +63,40 @@ class UserServicesV1:
         }
 
     def create_token(self, data: OrderedDict) -> dict:
-        session_id = self._verify_phone_number(data=data)
+        session_id = self._verify_phone_number(data=data, is_exist=True)
 
         return {
             "session_id": session_id
         }
 
-    def _verify_phone_number(self, data: OrderedDict) -> str:
-        user = self.user_repos.get_user(data=data)
+    def _verify_phone_number(self, data: OrderedDict, is_exist: bool = False) -> str:
+        phone_number = data['phone_number']
+        if is_exist:
+            user = self.user_repos.get_user(data=data)
+            phone_number = str(user.phone_number)
         code = self._generate_code()
         session_id = self._generate_session_id()
-        cache.set(session_id, {'code': code, 'phone_number': str(user.phone_number)}, timeout=300)
+        cache.set(session_id, {'code': code, 'phone_number': phone_number, **data}, timeout=300)
         self._send_code_to_phone_number(code, data['phone_number'])
         return session_id
 
     @staticmethod
-    def _send_letter_to_email(email: str) -> None:
-        print(f'created account at email: {email}')
+    def _send_letter_to_email(user: models.CustomUser) -> None:
+        send_templated_mail(
+            template_name='welcome',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email],
+            context={
+                'email': user.email,
+                'phone_number': user.phone_number
+            },
+            # Optional:
+            # cc=['cc@example.com'],
+            # bcc=['bcc@example.com'],
+            # headers={'My-Custom-Header':'Custom Value'},
+            # template_prefix="my_emails/",
+            # template_suffix="email",
+        )
 
     @staticmethod
     def _send_code_to_phone_number(code: str, phone_number: str) -> None:

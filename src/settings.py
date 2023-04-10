@@ -2,18 +2,19 @@ from datetime import timedelta
 from pathlib import Path
 import environ
 
-env = environ.Env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env['SECRET_KEY']
+SECRET_KEY = "#5tw2el*a!uqhcp_096m2jt8%p6q)w8u@hbxq362*c**dq3*-a"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,15 +32,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd package
     'rest_framework',
+    'djoser',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'django_filters',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
     'phonenumber_field',
+    'drf_yasg',
     # 2nd package
     'products',
     'users',
+    'seller_products',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +157,8 @@ CACHES = {
         }
     }
 }
+
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
