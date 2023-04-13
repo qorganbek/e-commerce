@@ -14,6 +14,6 @@ def send_order_notification(sender, instance, **kwargs):
         str(instance.id),
         {
             'type': 'send_notification',
-            'status': instance.status
+            'status': instance.status,
         }
     )

@@ -6,12 +6,10 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 class OrderConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
-        self.order_id = self.scope['url_route']['kwagrs']['order_id']
-
+        self.order_id = str(self.scope['url_route']['kwargs']['order_id'])
         await self.channel_layer.group_add(
             self.order_id, self.channel_name
         )
-
         await self.accept()
 
     async def disconnect(self, code):
