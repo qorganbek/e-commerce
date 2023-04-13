@@ -19,19 +19,23 @@ SECRET_KEY = "#5tw2el*a!uqhcp_096m2jt8%p6q)w8u@hbxq362*c**dq3*-a"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
+
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # 3rd package
     'rest_framework',
+    'channels',
     'djoser',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'phonenumber_field',
     'drf_yasg',
+    "corsheaders",
+
     # 2nd package
     'products',
     'users',
@@ -56,7 +62,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:4200']
 
 ROOT_URLCONF = 'src.urls'
 
@@ -77,6 +87,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'src.wsgi.application'
+
+ASGI_APPLICATION = 'src.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -175,4 +187,13 @@ SWAGGER_SETTINGS = {
             'in': 'header'
       }
    }
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }
