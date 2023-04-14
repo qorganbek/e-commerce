@@ -2,8 +2,6 @@ from datetime import timedelta
 from pathlib import Path
 import environ
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -141,7 +139,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # Default primary key field type
@@ -180,13 +177,13 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-      'Bearer': {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header'
-      }
-   }
+        }
+    }
 }
 
 CHANNEL_LAYERS = {
