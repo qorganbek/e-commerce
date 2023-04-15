@@ -1,12 +1,11 @@
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from django.db.models.signals import post_save
+from django.db.models import signals
 from django.dispatch import receiver
-
 from . import models
 
 
-@receiver(post_save, sender=models.Order)
+@receiver(signals.post_save, sender=models.Order)
 def send_order_notification(sender, instance, **kwargs):
     channel_layer = get_channel_layer()
 

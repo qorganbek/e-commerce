@@ -6,12 +6,13 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from . import choices
 
+
 class CustomUserManager(BaseUserManager):
-    def create_user(self, phone_number, email):
+    def create_user(self, phone_number, email, password):
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(phone_number=phone_number, email=self.normalize_email(email), is_active=True)
+        user = self.model(phone_number=phone_number, email=self.normalize_email(email), is_active=True,)
         user.set_unusable_password()
         user.save()
         return user
