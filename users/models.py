@@ -8,7 +8,7 @@ from . import choices
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, phone_number, email, password):
+    def create_user(self, phone_number, email, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
