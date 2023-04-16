@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c3995d1-ad99-4242-af39-c5ca45fae7e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/start.django.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6c3995d1-ad99-4242-af39-c5ca45fae7e7" name="Changes" comment="Dockerfile and docker compose">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5/storage_v2/_src_/database/ecommerce.QLYXWw/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5/storage_v2/_src_/database/ecommerce.QLYXWw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5/storage_v2/_src_/database/ecommerce.QLYXWw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/472590d5-6efe-4d80-bc0d-8da346bd0ce5/storage_v2/_src_/database/ecommerce.QLYXWw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +301,20 @@
       <workItem from="1681551462879" duration="540000" />
       <workItem from="1681564063102" duration="835000" />
       <workItem from="1681573487911" duration="8223000" />
+      <workItem from="1681583683775" duration="278000" />
+      <workItem from="1681628807099" duration="746000" />
+      <workItem from="1681638272601" duration="141000" />
+      <workItem from="1681685010276" duration="1073000" />
+      <workItem from="1681686163700" duration="1655000" />
     </task>
+    <task id="LOCAL-00001" summary="Dockerfile and docker compose">
+      <created>1681583801699</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681583801699</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +340,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Dockerfile and docker compose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile and docker compose" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/e_commerce$1.coverage" NAME="1 Coverage Results" MODIFIED="1676828448106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api_urls" />
